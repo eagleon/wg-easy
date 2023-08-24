@@ -23,6 +23,7 @@ const {
   WG_POST_UP,
   WG_PRE_DOWN,
   WG_POST_DOWN,
+  WG_LAN_IP
 } = require('../config');
 
 module.exports = class WireGuard {
@@ -104,14 +105,24 @@ PostDown = ${WG_POST_DOWN}
 
     for (const [clientId, client] of Object.entries(config.clients)) {
       if (!client.enabled) continue;
-
-      result += `
+      if (client.address === WG_LAN_IP){
+        result += `
 
 # Client: ${client.name} (${clientId})
 [Peer]
 PublicKey = ${client.publicKey}
 PresharedKey = ${client.preSharedKey}
 AllowedIPs = ${client.address}/32,${WG_ALLOWED_IPS}`;
+      }else{
+        result += `
+
+# Client: ${client.name} (${clientId})
+[Peer]
+PublicKey = ${client.publicKey}
+PresharedKey = ${client.preSharedKey}
+AllowedIPs = ${client.address}/32`;
+      }
+
     }
 
     debug('Config saving...');

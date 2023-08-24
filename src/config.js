@@ -12,6 +12,7 @@ module.exports.WG_PORT = process.env.WG_PORT || 51820;
 module.exports.WG_MTU = process.env.WG_MTU || null;
 module.exports.WG_PERSISTENT_KEEPALIVE = process.env.WG_PERSISTENT_KEEPALIVE || 0;
 module.exports.WG_DEFAULT_ADDRESS = process.env.WG_DEFAULT_ADDRESS || '10.8.0.x';
+module.exports.WG_LAN_IP = process.env.WG_LAN_IP || '10.8.0.5';
 module.exports.WG_DEFAULT_DNS = typeof process.env.WG_DEFAULT_DNS === 'string'
   ? process.env.WG_DEFAULT_DNS
   : '1.1.1.1';
